@@ -1,0 +1,40 @@
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] tablicaSortowanie = new int[10];
+        for(int i = 0; i<tablicaSortowanie.length; i++){
+            System.out.println("podaj liczbę do tablicy");
+            tablicaSortowanie[i] = scanner.nextInt();
+        }
+Sortowanie(tablicaSortowanie);
+        SzukanieNajwiekszejLiczby(tablicaSortowanie);
+
+    }
+    public static void Sortowanie(int[] tab){
+        for(int a = 0; a<tab.length-1;a++){
+        for(int i=0; i<tab.length-1;i++) {
+            if (tab[i] < tab[i + 1]) {
+                int temp = tab[i];
+                tab[i] = tab[i + 1];
+                tab[i + 1] = temp;
+            }
+        }
+
+            }
+        for(int j=0; j< tab.length;j++){
+            System.out.print(tab[j]+",");
+        }
+
+    }
+    private static int SzukanieNajwiekszejLiczby(int[] tab){
+        int najw = tab[0];
+        for(int i=1; i<tab.length;i++){
+            if(tab[i]>najw){
+                najw = tab[i];
+            }
+        }
+        System.out.println("największa liczba to:"+najw);
+return najw;
+    }
+}
