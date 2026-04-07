@@ -14,7 +14,8 @@
     <View
         android:id="@+id/widok"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:background="#FFFFFF" />
 
     <TextView
         android:id="@+id/tekst"
@@ -70,6 +71,7 @@
     <View
         android:id="@+id/malyWidok"
         android:layout_width="300dp"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        android:background="#FFFFFF" />
 
 </LinearLayout>
