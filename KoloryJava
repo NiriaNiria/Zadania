@@ -1,35 +1,77 @@
-package com.example.zmianakolory;
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="#EBE184"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-import android.os.Bundle;
-import android.widget.*;
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import android.view.View;
+    <View
+        android:id="@+id/widok"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#FFFFFF" />
 
-public class MainActivity extends AppCompatActivity {
+    <TextView
+        android:id="@+id/tekst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="30dp"
+        android:text="Dobierz kolor suwakami i zapisz przyciskiem"
+        android:textSize="20sp" />
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        Button pobierz = findViewById(R.id.pobierz);
-        SeekBar r = findViewById(R.id.r);
-        SeekBar g = findViewById(R.id.g);
-        SeekBar b = findViewById(R.id.b);
-        TextView rt = findViewById(R.id.rTekst);
-        TextView gt = findViewById(R.id.gTekst);
-        TextView bt = findViewById(R.id.bTekst);
-        View malyWidok = findViewById(R.id.malyWidok);
-         View widok =   findViewById(R.id.widok);
+    <TextView
+        android:id="@+id/rTekst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp" />
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-    }
-}
+    <SeekBar
+        android:id="@+id/r"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/gTekst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <SeekBar
+        android:id="@+id/g"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/bTekst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="20sp" />
+
+    <SeekBar
+        android:id="@+id/b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/pobierz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#976010"
+        android:text="Pobierz" />
+
+    <View
+        android:id="@+id/malyWidok"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="#FFFFFF" />
+
+</LinearLayout>
