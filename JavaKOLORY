@@ -1,0 +1,82 @@
+package com.example.zmianakolory;
+
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        Button pobierz = findViewById(R.id.pobierz);
+        SeekBar r = findViewById(R.id.r);
+        SeekBar g = findViewById(R.id.g);
+        SeekBar b = findViewById(R.id.b);
+        TextView rt = findViewById(R.id.rTekst);
+        TextView gt = findViewById(R.id.gTekst);
+        TextView bt = findViewById(R.id.bTekst);
+        View malyWidok = findViewById(R.id.malyWidok);
+        View widok = findViewById(R.id.widok);
+TextView wynik = findViewById(R.id.wynik);
+        r.setMax(255);
+        g.setMax(255);
+        b.setMax(255);
+
+        r.setProgress(255);
+        g.setProgress(255);
+        b.setProgress(255);
+
+        rt.setText(String.valueOf(r.getProgress()));
+        gt.setText(String.valueOf(g.getProgress()));
+        bt.setText(String.valueOf(b.getProgress()));
+
+        widok.setBackgroundColor(Color.rgb(r.getProgress(), g.getProgress(), b.getProgress()));
+
+        SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                rt.setText(String.valueOf(r.getProgress()));
+                gt.setText(String.valueOf(g.getProgress()));
+                bt.setText(String.valueOf(b.getProgress()));
+
+                widok.setBackgroundColor(Color.rgb(r.getProgress(), g.getProgress(), b.getProgress()));
+                wynik.setText("R: "+r.getProgress()+" G: "+g.getProgress()+" B: "+ b.getProgress());
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        };
+
+        r.setOnSeekBarChangeListener(listener);
+        g.setOnSeekBarChangeListener(listener);
+        b.setOnSeekBarChangeListener(listener);
+
+        pobierz.setOnClickListener(v -> {
+            malyWidok.setBackgroundColor(Color.rgb(r.getProgress(), g.getProgress(), b.getProgress()));
+        });
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+}
