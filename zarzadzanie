@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Text;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace WindowsFormsApp5
+{
+    public partial class Form1 : Form
+    {
+        private BindingList<Wydatek> listaWydatkow;
+        private string sciezkaPliku = "wydatki.csv";
+        MessageBox.Show("Podano niepoprawna kwote! Uzyj odpowiedniego separatora dziesietnego","blad")
+        public Form1()
+        {
+            InitializeComponent();
+            listaWydatkow = new BindingList<Wydatek>();
+            dgvWydatki.DataSource = listaWydatkow;
+            if (cmbKategoria.Items.Count > 0)
+                cmbKategoria.SelectedIndex = 0;
+        }
+        private void AktualizujSume()
+        {
+            decimal suma = listaWydatkow.Sum(w => w.Kwota);
+            lblSuma.Text = $"suma wydatkow:{suma:C2}";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvWydatki_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void lblSuma_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbKategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtKwota_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNazwa_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtKwota.Text,out decimal kwota))
+            { if (string.IsNullOrWhiteSpace(txtNazwa.Text))
+                {
+MessageBox.Show("podaj nazwe wydatku", "brak danych")
+                        return;
+                }
+                Wydatek nowyWydatek = new Wydatek(txtNazwa.Text, kwota, cmbKategoria.Text);
+                listaWydatkow.Add(nowyWydatek);
+            AktualizujSume()
+                    txtNazwa.Clear()
+                    txtKwota.Clear()}
+            else
+            {
+                MessageBox.Show("podano niepoprawna kwote! uzyj odpowiedniego separatora dziesietnego", "blad");
+            }
+        }
+
+        private void btnUsun_Click(object sender, EventArgs e)
+        {
+            if (dgvWydatki.SelectedRows.Count > 0)
+            {
+                int indeks = dgvWydatki.SelectedRows[0].Index;
+                listaWydatkow.RemoveAt(index);
+                AktualizujSume();
+            }
+        }
+
+        private void btnZapisz_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter())
+                {
+                    foreach (Wydatek w in listaWydatkow)
+                    {
+                        sw.WriteLine($"{ w.Nazwa}
+                        ;{ w.Kwota};{ w.Kategoria}");
+                    }
+                }
+                MessageBox.Show("Dane zapisane pomyslnie","sukces")
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"blad podczas zapisu pliku:{ex.Message}", "blad");   }
+        }
+    }
+}
